@@ -26,22 +26,48 @@ jobs:
         terraform_version: '1.4.6'  
  
     - name: Terraform Init
-      working-directory: Infrastructure
+      working-directory: Infrastructure/s3
       run: |
         terraform init
  
     - name: Terraform Validate
-      working-directory: Infrastructure
+      working-directory: Infrastructure/s3
       run: |
         terraform validate
  
     - name: Terraform Plan
-      working-directory: Infrastructure
+      working-directory: Infrastructure/s3
       run: |
         terraform plan
  
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'  # Only apply on main branch
-      working-directory: Infrastructure
+      working-directory: Infrastructure/s3
       run: |
         terraform apply -auto-approve
+ 
+provider "aws" {
+
+  region = "us-east-1"  # Specify your desired region
+
+}
+ 
+resource "aws_instance" "example" {
+
+  ami           = "ami-0c55b159cbfafe1f0"  # Replace with the desired AMI ID
+
+  instance_type = "t2.micro"              # Specify the instance type
+ 
+  key_name = "my-key-pair"                # Ensure the key pair is already created in the AWS region
+ 
+  security_groups = ["my-security-group"]  # Specify the security group name
+ 
+  tags = {
+
+    Name = "MyEC2Instance"
+
+  }
+
+}
+
+ 

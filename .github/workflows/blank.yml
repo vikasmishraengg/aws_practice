@@ -1,4 +1,4 @@
-name: Terraform-04
+name: Terraform
  
 on:
   push:

@@ -2,45 +2,9 @@ provider "aws" {
   region = "us-east-1"  # Specify the AWS region
 }
 
-resource "aws_elb" "bar" {
-  name               = "foobar-terraform-elb"
-  availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
-
-  access_logs {
-    bucket        = "foo"
-    bucket_prefix = "bar"
-    interval      = 60
-  }
-
-  listener {
-    instance_port     = 80
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
-  }
-
-  listener {
-    instance_port      = 80
-    instance_protocol  = "http"
-    lb_port            = 80
-    lb_protocol        = "http"
-  }
-
-  health_check {
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 3
-    target              = "HTTP:80/"
-    interval            = 30
-  }
-
-  instances                   = i-0a3b275a09d638270.instances
-  cross_zone_load_balancing   = true
-  idle_timeout                = 400
-  connection_draining         = true
-  connection_draining_timeout = 400
-
-  tags = {
-    Name = "foobar-terraform-elb"
-  }
+resource "aws_lb" "gfg_lb" {
+  name               = "gfg-network-loadbalancer"
+  internal           = false
+  load_balancer_type = "network"
+  subnets = ["subnet-0a26d92eb585e3ff0","subnet-0f3d084ff783d9348"]
 }

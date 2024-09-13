@@ -34,7 +34,7 @@ resource "aws_elb" "bar" {
     interval            = 30
   }
 
-  instances                   = [aws_instance.foo.subnet-0a26d92eb585e3ff0]
+  instances                   = subnet-0a26d92eb585e3ff0
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true

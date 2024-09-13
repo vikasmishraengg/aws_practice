@@ -24,6 +24,6 @@ resource "aws_instance" "example" {
   security_groups = [aws_security_group.allow_ssh.name]
  
   tags = {
-    Name = "TerraformExample"
+    Name = "VikiEC2"
   }
 }

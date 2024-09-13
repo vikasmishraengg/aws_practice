@@ -1,11 +1,11 @@
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh_2"
-  description = "Allow SSH inbound traffic"
+  description = "Allow SSH inbound 45"
  
   ingress {
-    description      = "SSH"
-    from_port        = 22
-    to_port          = 22
+    description      = "SMTP"
+    from_port        = 25
+    to_port          = 25
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
@@ -18,12 +18,12 @@ resource "aws_security_group" "allow_ssh" {
   }
 }
  
-resource "aws_instance" "example" {
+resource "aws_instance" "VikiEc" {
   ami           = "ami-0c2b8ca1dad447f8a"  # Example AMI ID; replace with a valid one for your region
   instance_type = "t2.micro"
   security_groups = [aws_security_group.allow_ssh.name]
  
   tags = {
-    Name = "VikiEC2"
+    Name = "VikiEC5"
   }
 }

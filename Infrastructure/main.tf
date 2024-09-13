@@ -31,3 +31,27 @@ resource "aws_instance" "example" {
     Name = "TerraformExample"
   }
 }
+resource "aws_lb" "test" {
+  name               = "test-lb-tf"
+  internal           = false
+  load_balancer_type = "network"
+  subnets            = [for subnet in aws_subnet.public : subnet-0a26d92eb585e3ff0.id]
+
+  enable_deletion_protection = true
+
+  tags = {
+    Environment = "production"
+  }
+}
+resource "aws_lb" "test" {
+  name               = "test-lb-tf"
+  internal           = false
+  load_balancer_type = "network"
+  subnets            = [for subnet in aws_subnet.public : subnet-0a26d92eb585e3ff0.id]
+
+  enable_deletion_protection = true
+
+  tags = {
+    Environment = "production"
+  }
+}

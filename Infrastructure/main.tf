@@ -34,7 +34,7 @@ resource "aws_elb" "bar" {
     interval            = 30
   }
 
-  instances                   = i-0a3b275a09d638270
+  instances                   = aws_instance.foo.i-0a3b275a09d638270
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true

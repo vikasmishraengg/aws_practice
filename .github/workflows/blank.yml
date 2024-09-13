@@ -26,22 +26,17 @@ jobs:
         terraform_version: '1.4.6'  
  
     - name: Terraform Init
-      working-directory: Infrastructure
       run: |
         terraform init
  
     - name: Terraform Validate
-      working-directory: Infrastructure
       run: |
         terraform validate
  
     - name: Terraform Plan
-      working-directory: Infrastructure
       run: |
         terraform plan
- 
+
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/main'  # Only apply on main branch
-      working-directory: Infrastructure/Load balancer
       run: |
         terraform apply -auto-approve

@@ -2,11 +2,32 @@ provider "aws" {
   region = "us-east-1"  # Specify the AWS region
 }
  
-resource "aws_s3_bucket" "basic_bucket" {
-  bucket = "my-simple-bucket-${random_id.bucket_suffix.hex}"  # Unique bucket name
-  acl    = "private"  # Set the access control list
+resource "aws_security_group" "allow_ssh" {
+  name        = "allow_ssh"
+  description = "Allow SSH inbound traffic"
+ 
+  ingress {
+    description      = "SSH"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+ 
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
 }
  
-resource "random_id" "bucket_suffix" {
-  byte_length = 2  # Generates a sufficiently unique suffix for the bucket name
+resource "aws_instance" "example" {
+  ami           = "ami-0c2b8ca1dad447f8a"  # Example AMI ID; replace with a valid one for your region
+  instance_type = "t2.micro"
+  security_groups = [aws_security_group.allow_ssh.name]
+ 
+  tags = {
+    Name = "TerraformExample"
+  }
 }

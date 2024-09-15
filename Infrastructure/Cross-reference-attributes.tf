@@ -3,7 +3,7 @@ resource "aws_eip" "lb" {
 }
 
 resource "aws_security_group" "example" {
-  name        = "attribute-sg3"
+  name        = "attribute-sg4"
 }
 
 resource "aws_vpc_security_group_ingress_rule" "example" {
@@ -15,6 +15,6 @@ resource "aws_vpc_security_group_ingress_rule" "example" {
   to_port     = 443
 }
 output "public-ip" {
-    value = aws_eip.lb
+    value = aws_eip.lb.public_dns
   
 }

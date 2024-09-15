@@ -3,7 +3,7 @@ resource "aws_eip" "lb" {
 }
 
 resource "aws_security_group" "example" {
-  name        = "attribute-sg"
+  name        = "attribute-sg1"
 }
 
 resource "aws_vpc_security_group_ingress_rule" "example" {

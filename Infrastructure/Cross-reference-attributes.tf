@@ -14,3 +14,7 @@ resource "aws_vpc_security_group_ingress_rule" "example" {
   ip_protocol = "tcp"
   to_port     = 443
 }
+output "public-ip" {
+    value = aws_eip.lb.public_ip
+  
+}
